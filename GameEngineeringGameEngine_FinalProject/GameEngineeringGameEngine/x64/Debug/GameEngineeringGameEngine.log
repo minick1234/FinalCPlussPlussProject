@@ -7,9 +7,11 @@ C:\MYWHOLEASSDESKTOP\GameEngineeringGameEngine\GameEngineeringGameEngine_FinalPr
 C:\MYWHOLEASSDESKTOP\GameEngineeringGameEngine\GameEngineeringGameEngine_FinalProject\GameEngineeringGameEngine\SpriteSheet.h(43,57): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
 C:\MYWHOLEASSDESKTOP\GameEngineeringGameEngine\GameEngineeringGameEngine_FinalProject\GameEngineeringGameEngine\SpriteSheet.h(47,37): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
 C:\MYWHOLEASSDESKTOP\GameEngineeringGameEngine\GameEngineeringGameEngine_FinalProject\GameEngineeringGameEngine\SpriteSheet.h(48,37): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\MYWHOLEASSDESKTOP\GameEngineeringGameEngine\GameEngineeringGameEngine_FinalProject\GameEngineeringGameEngine\GameController.cpp(198,44): warning C4305: 'argument': truncation from 'int' to 'byte'
-C:\MYWHOLEASSDESKTOP\GameEngineeringGameEngine\GameEngineeringGameEngine_FinalProject\GameEngineeringGameEngine\GameController.cpp(198,40): warning C4309: 'argument': truncation of constant value
-C:\MYWHOLEASSDESKTOP\GameEngineeringGameEngine\GameEngineeringGameEngine_FinalProject\GameEngineeringGameEngine\GameController.cpp(198,34): warning C4309: 'argument': truncation of constant value
-C:\MYWHOLEASSDESKTOP\GameEngineeringGameEngine\GameEngineeringGameEngine_FinalProject\GameEngineeringGameEngine\GameController.cpp(216,13): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\MYWHOLEASSDESKTOP\GameEngineeringGameEngine\GameEngineeringGameEngine_FinalProject\GameEngineeringGameEngine\GameController.cpp(236,16): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\MYWHOLEASSDESKTOP\GameEngineeringGameEngine\GameEngineeringGameEngine_FinalProject\GameEngineeringGameEngine\GameController.cpp(206,44): warning C4305: 'argument': truncation from 'int' to 'byte'
+C:\MYWHOLEASSDESKTOP\GameEngineeringGameEngine\GameEngineeringGameEngine_FinalProject\GameEngineeringGameEngine\GameController.cpp(206,40): warning C4309: 'argument': truncation of constant value
+C:\MYWHOLEASSDESKTOP\GameEngineeringGameEngine\GameEngineeringGameEngine_FinalProject\GameEngineeringGameEngine\GameController.cpp(206,34): warning C4309: 'argument': truncation of constant value
+C:\MYWHOLEASSDESKTOP\GameEngineeringGameEngine\GameEngineeringGameEngine_FinalProject\GameEngineeringGameEngine\GameController.cpp(224,13): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\MYWHOLEASSDESKTOP\GameEngineeringGameEngine\GameEngineeringGameEngine_FinalProject\GameEngineeringGameEngine\GameController.cpp(244,19): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  GameEngineeringGameEngine.cpp
+  Generating Code...
   GameEngineeringGameEngine.vcxproj -> C:\MYWHOLEASSDESKTOP\GameEngineeringGameEngine\GameEngineeringGameEngine_FinalProject\x64\Debug\GameEngineeringGameEngine.exe
