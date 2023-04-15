@@ -1,0 +1,10 @@
+﻿          1 file(s) copied.
+          1 file(s) copied.
+          1 file(s) copied.
+  GameController.cpp
+C:\MYWHOLEASSDESKTOP\GameEngineeringGameEngine\GameEngineeringGameEngine\GameEngineeringGameEngine\StackAllocator.h(10,46): warning C4244: 'return': conversion from '__int64' to 'int', possible loss of data
+C:\MYWHOLEASSDESKTOP\GameEngineeringGameEngine\GameEngineeringGameEngine\GameEngineeringGameEngine\SpriteSheet.h(43,43): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\MYWHOLEASSDESKTOP\GameEngineeringGameEngine\GameEngineeringGameEngine\GameEngineeringGameEngine\SpriteSheet.h(43,57): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\MYWHOLEASSDESKTOP\GameEngineeringGameEngine\GameEngineeringGameEngine\GameEngineeringGameEngine\SpriteSheet.h(47,37): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\MYWHOLEASSDESKTOP\GameEngineeringGameEngine\GameEngineeringGameEngine\GameEngineeringGameEngine\SpriteSheet.h(48,37): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  GameEngineeringGameEngine.vcxproj -> C:\MYWHOLEASSDESKTOP\GameEngineeringGameEngine\GameEngineeringGameEngine\x64\Debug\GameEngineeringGameEngine.exe
