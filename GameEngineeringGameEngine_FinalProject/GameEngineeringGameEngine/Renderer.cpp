@@ -18,7 +18,7 @@ Renderer::~Renderer() {
 
 void Renderer::Initialize(int _xResolution, int _yResolution) {
 	M_ASSERT((SDL_Init(SDL_INIT_EVERYTHING) >= 0), "");
-	m_window = SDL_CreateWindow("Final Exam Game - Dominik Ziolkowski", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, _xResolution, _yResolution, SDL_WINDOW_SHOWN);
+	m_window = SDL_CreateWindow("SDLRPS - Final Exam Game - Dominik Ziolkowski", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, _xResolution, _yResolution, SDL_WINDOW_SHOWN);
 
 	M_ASSERT(m_window != nullptr, "Failed to initalize SDL window");
 	m_renderer = SDL_CreateRenderer(Renderer::Instance().GetWindow(), -1, 0);

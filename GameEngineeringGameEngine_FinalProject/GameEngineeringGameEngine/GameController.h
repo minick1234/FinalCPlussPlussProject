@@ -22,7 +22,7 @@ public :
 	void RunGame();
 	void Initialize();
 	void HandleInput(SDL_Event _event);
-	void HandleInput(SDL_Event _event, bool &NotValidUserName);
+	void HandleInput(SDL_Event _event, bool &NotValidUserName, bool& playerOne);
 
 	void InitializeLevelOne();
 	void InitializeLevelTwo();
@@ -37,6 +37,9 @@ private :
 	SDL_Event m_sdlEvent;
 	Renderer* m_renderer;
 	TTFont* m_fArial20;
+	TTFont* m_fArial40;
+
+
 	bool m_quit;
 	InputController* m_input;
 	

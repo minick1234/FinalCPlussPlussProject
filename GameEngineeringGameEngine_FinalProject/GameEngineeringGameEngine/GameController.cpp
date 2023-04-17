@@ -19,6 +19,7 @@ GameController::GameController() {
 	m_sdlEvent = {};
 	m_renderer = nullptr;
 	m_fArial20 = nullptr;
+	m_fArial40 = nullptr;
 	m_quit = false;
 	m_input = nullptr;
 	m_audio = nullptr;
@@ -42,6 +43,7 @@ GameController::~GameController() {
 void GameController::ShutDown() {
 	delete m_fArial20;
 	delete m_wavDraw;
+	delete m_fArial40;
 }
 
 void GameController::InitializeLevelOne() {
@@ -84,96 +86,78 @@ void GameController::LoadLevelOneHud() {
 void GameController::Initialize() {
 	AssetController::Instance().Initialize(10000000);
 	m_renderer = &Renderer::Instance();
-	m_renderer->Initialize(1920, 1080);
+	m_renderer->Initialize(1920, 900);
 	m_input = &InputController::Instance();
 	m_fArial20 = new TTFont();
 	m_fArial20->Initialize(20);
+
+
+	m_fArial40 = new TTFont();
+	m_fArial40->Initialize(40);
+
 	m_audio = &AudioController::Instance();
 
 	m_effects[0] = m_audio->LoadEffect("../Assets/Audio/Effects/Whoosh.wav");
-	m_effects[2] = m_audio->LoadEffect("../Assets/Audio/Effects/DistantGunshot.mp3");
+	m_effects[1] = m_audio->LoadEffect("../Assets/Audio/Effects/DistantGunshot.mp3");
 	m_song = m_audio->LoadSong("../Assets/Audio/Music/Track1.mp3");
 }
 
-
-void GameController::HandleInput(SDL_Event event) {
+void GameController::HandleInput(SDL_Event event, bool& NotValidUserName, bool& PlayerOne) {
 	string temp;
 
 	if (m_sdlEvent.type == SDL_QUIT || m_input->KB()->KeyUp(m_sdlEvent, SDLK_ESCAPE)) {
 		m_quit = true;
 	}
 	else if ((temp = m_input->KB()->TextInput(event)) != "") {
-		m_text += temp;
+
+		if (PlayerOne) {
+			m_text += temp;
+
+		}
+		else {
+			m_text2 += temp;
+
+		}
 	}
 	//if backspace is pressed we want to remove from the text input buffer.
 	else if (m_input->KB()->KeyDown(m_sdlEvent, SDLK_BACKSPACE) && !m_text.empty()) {
-		m_text.erase(m_text.length() - 1);
-	}
-	else if (m_input->KB()->KeyDown(m_sdlEvent, SDLK_BACKSPACE) && m_text.empty()) {
-		cout << " sorry but this shit is empty dawg." << endl;
-	}
+		if (PlayerOne) {
+			m_text.erase(m_text.length() - 1);
+		}
+		else {
 
+			m_text2.erase(m_text.length() - 1);
+		}
+
+	}
 	else if (m_input->KB()->KeyUp(m_sdlEvent, SDLK_RETURN)) {
 		//Check if we are currently on the first or second players name
 
 		//depending on the name we can then do the certain check too see if it is empty and display the correct message.
+		if (PlayerOne) {
 
-		if (m_text.length() < 1 || m_text.length() > 20) {
-			cout << "in here because this is not a valid name for this user" << endl;
-			m_fArial20->Write(m_renderer->GetRenderer(), string("Sorry but the name must be between 1 and 20 characters inclusive.").c_str(), SDL_Color{ 255,0,0 }, SDL_Point{ 50, 420 });
+			if (m_text.length() <= 0 || m_text.length() > 21) {
+				cout << "in here because this is not a valid name for this first user user" << endl;
+				NotValidUserName = true;
+				return;
+			}
+		}
+
+		if (!PlayerOne) {
+
+			if (m_text2.length() <= 0 || m_text2.length() > 21) {
+				cout << "in here because this is not a valid name for this user" << endl; \
+					NotValidUserName = true;
+				return;
+			}
+
 		}
 
 		//If valid we continue to the next player name 
 
 		//otherwise if both players have been set we continue to the next level now.
-
-	}
-	else if (m_input->MS()->Moved(m_sdlEvent, m_mPos)) {
-		m_smPos = "Mouse Position [" + to_string(m_mPos.X) + ";" + to_string(m_mPos.Y) + "]";
-	}
-	else if ((m_input->CT()->Added(m_sdlEvent)) || (m_input->CT()->Removed(m_sdlEvent)) || (m_input->CT()->ProcessButtons(m_sdlEvent)) || (m_input->CT()->ProcessMotion(m_sdlEvent))) {
-		m_ctInfo = m_input->CT()->ToString();
-	}
-	else {
-		m_input->MS()->ProcessButtons(event);
-	}
-}
-
-
-void GameController::HandleInput(SDL_Event event, bool& NotValidUserName) {
-	string temp;
-
-	if (m_sdlEvent.type == SDL_QUIT || m_input->KB()->KeyUp(m_sdlEvent, SDLK_ESCAPE)) {
-		m_quit = true;
-	}
-	else if ((temp = m_input->KB()->TextInput(event)) != "") {
-		m_text += temp;
-	}
-	//if backspace is pressed we want to remove from the text input buffer.
-	else if (m_input->KB()->KeyDown(m_sdlEvent, SDLK_BACKSPACE) && !m_text.empty()) {
-		m_text.erase(m_text.length() - 1);
-	}
-	else if (m_input->KB()->KeyUp(m_sdlEvent, SDLK_RETURN)) {
-		//Check if we are currently on the first or second players name
-
-		//depending on the name we can then do the certain check too see if it is empty and display the correct message.
-
-		if (m_text.length() < 1 || m_text.length() > 20) {
-			cout << "in here because this is not a valid name for this user" << endl;
-			NotValidUserName = true;
-			return;
-		}
-
-		/*	if (m_text2.length() < 1 || m_text2.length() > 20) {
-				cout << "in here because this is not a valid name for this user" << endl; \
-					NotValidUserName = true;
-			}*/
-
-
-			//If valid we continue to the next player name 
-
-			//otherwise if both players have been set we continue to the next level now.
 		NotValidUserName = false;
+		PlayerOne = false;
 	}
 	else if (m_input->MS()->Moved(m_sdlEvent, m_mPos)) {
 		m_smPos = "Mouse Position [" + to_string(m_mPos.X) + ";" + to_string(m_mPos.Y) + "]";
@@ -208,6 +192,7 @@ void GameController::RunGame() {
 
 	Point ws = m_renderer->GetWindowSize();
 
+	bool PlayerOne = true;
 	bool MainMenuFirstTime = false;
 	bool NotValidName = false;
 
@@ -228,16 +213,15 @@ void GameController::RunGame() {
 		m_renderer->ClearScreen();
 
 		while (SDL_PollEvent(&m_sdlEvent) != 0) {
-			HandleInput(m_sdlEvent, NotValidName);
+			HandleInput(m_sdlEvent, NotValidName, PlayerOne);
 		}
 
 		m_renderer->RenderTexture(Level1Background, Rect(0, 0, 1920, 1080));
-		m_fArial20->Write(m_renderer->GetRenderer(), m_text.c_str(), SDL_Color{ 196,180,84 }, SDL_Point{ 50,80 });
-
-		m_fArial20->Write(m_renderer->GetRenderer(), m_text.c_str(), SDL_Color{ 196,180,84 }, SDL_Point{ 50, 220 });
+		m_fArial40->Write(m_renderer->GetRenderer(), m_text.c_str(), SDL_Color{ 196,180,84 }, SDL_Point{ 50,70 });
+		m_fArial40->Write(m_renderer->GetRenderer(), m_text2.c_str(), SDL_Color{ 196,180,84 }, SDL_Point{ 50, 200 });
 
 		if (NotValidName) {
-			m_fArial20->Write(m_renderer->GetRenderer(), string("Sorry but the username must be between 1 and 20 characters inclusive!").c_str(), SDL_Color{ 255,0,0 }, SDL_Point{ 27, 300 });
+			m_fArial40->Write(m_renderer->GetRenderer(), string("Sorry but the username must be between 1 and 20 characters inclusive!").c_str(), SDL_Color{ 255,0,0 }, SDL_Point{ 27, 300 });
 		}
 
 		GameTime += t->GetDeltaTime();
