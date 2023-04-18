@@ -1,7 +1,6 @@
 #include "Level.h"
 
 Level::Level() {
-	AssetController::Instance().Initialize(10000000);
 	Unit::Pool = new ObjectPool<Unit>();
 	SoundEffect::Pool = new ObjectPool<SoundEffect>();
 

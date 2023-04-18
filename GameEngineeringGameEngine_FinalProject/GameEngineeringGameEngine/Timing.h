@@ -22,6 +22,7 @@ private:
 	unsigned int m_fpsStart;
 	unsigned int m_fpsCount;
 	unsigned int m_fpsLast;
+	unsigned int m_FixedFrameRate;
 	float m_deltaTime;
 };
 

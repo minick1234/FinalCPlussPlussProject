@@ -28,6 +28,7 @@ unsigned char* StackAllocator::GetMemory(unsigned int _sizeBytes) {
 	return nullptr; // Not enough bytes left on the stack
 }
 
+
 void StackAllocator::Mark() {
 	m_marker = m_stackPosition;
 }

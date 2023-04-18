@@ -21,14 +21,13 @@ public :
 
 	void RunGame();
 	void Initialize();
-	void HandleInput(SDL_Event _event);
-	void HandleInput(SDL_Event _event, bool &NotValidUserName, bool& playerOne);
-
-	void InitializeLevelOne();
+	void HandleInputLevelOne(SDL_Event _event, bool &NotValidUserName, bool& playerOne, bool& LevelComplete);
+	void HandleInputLevelTwo(SDL_Event event);
+	void PrintPlayerHud(string playerText, Point PlayerPosition, int GameState, bool HasRolled, int WinState, int wins, int loses);
 	void InitializeLevelTwo();
 	void SaveLevelTwo();
 	void LoadLevelTwo();
-	void LoadLevelTwoHud(int GameTime, int FramesPerSecond);
+	void LoadLevelTwoHud(int GameTime, int FramesPerSecond, int Saves, int Loads);
 	void LoadLevelOneHud();
 	void ShutDown();
 

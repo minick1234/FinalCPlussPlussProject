@@ -39,12 +39,13 @@ bool FileController::ReadFile(string _filePath, unsigned char* _buffer, unsigned
 	m_readSuccess = false;
 	M_ASSERT(fopen_s(&m_handle, _filePath.c_str(), "rb") == 0, "Could not open the file");
 
-	if (m_handle != nullptr) {
+	if (m_handle != nullptr) {		
 		M_ASSERT(fread(_buffer, 1, _bufferSize, m_handle) == _bufferSize, "All bytes not read from the file");
 		M_ASSERT(ferror(m_handle) == 0, "Error reading the file");
 		M_ASSERT(fclose(m_handle) == 0, "Could not close the file");
 		m_readSuccess = true;
 	}
+
 	if (m_thread.joinable()) {
 		m_thread.detach(); // make thread not joinable anymore
 	}

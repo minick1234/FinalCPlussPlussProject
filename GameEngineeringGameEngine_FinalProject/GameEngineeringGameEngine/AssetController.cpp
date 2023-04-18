@@ -44,5 +44,7 @@ Asset* AssetController::GetAsset(string _guid) {
 	FileController::Instance().ReadFile(_guid, asset->GetData(), asset->GetDataSize());
 
 	m_assets[_guid] = asset;
+	cout << Stack->GetBytesUsed() << endl;
 	return asset;
+
 }

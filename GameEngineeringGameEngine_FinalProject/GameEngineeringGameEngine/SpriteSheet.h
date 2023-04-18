@@ -20,6 +20,11 @@ enum AnimationNames {
 	EN_AN_DASH_ATTACH,
 	EN_AN_SLIDE,
 	EN_AN_LADDER_GRAB,
+	EN_AN_RPS_ROCK,
+	EN_AN_RPS_PAPER,
+	EN_AN_RPS_SCISSORS,
+	EN_AN_RPS_IDLE,
+	EN_AN_RPS_ROLL
 };
 
 
@@ -32,7 +37,7 @@ public:
 	void DeSerialize(std::istream& _stream)override;
 	void ToString() override;
 
-	void SetSize(byte _rows, byte _columns, byte _clipSizeX, byte _clipSizeY);
+	void SetSize(int _rows, int _columns, int _clipSizeX, int _clipSizeY);
 	void AddAnimation(AnimationNames _name, short clipStart, short _clipCount, float _clipSpeed);
 	Rect Update(AnimationNames _name, float _deltaTime);
 	int GetCurrentClip(AnimationNames _name);
@@ -49,16 +54,16 @@ public:
 
 	void UpdateAnimationSheetsClipSpeed(AnimationNames _name, float newClipSpeed);
 	float AnimationSheetsAnimationClipSpeed(AnimationNames _name) { return m_animations[_name]->GetClipSpeed(); }
-	byte GetClipSizeX() { return m_clipSizeX; }
-	byte GetClipSizeY() { return m_clipSizeY; }
+	int GetClipSizeX() { return m_clipSizeX; }
+	int GetClipSizeY() { return m_clipSizeY; }
 
 	static ObjectPool<SpriteSheet>* Pool;
 
 private:
-	byte m_rows;
-	byte m_columns;
-	byte m_clipSizeX;
-	byte m_clipSizeY;
+	int m_rows;
+	int m_columns;
+	int m_clipSizeX;
+	int m_clipSizeY;
 	map<AnimationNames, SpriteAnim*> m_animations;
 };
 

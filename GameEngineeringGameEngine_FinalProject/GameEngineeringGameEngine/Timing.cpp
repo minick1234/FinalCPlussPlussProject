@@ -8,7 +8,7 @@ Timing::Timing() {
 	m_currentTime = SDL_GetTicks();
 	m_lastTime = m_currentTime;
 	m_fpsStart = m_currentTime;
-
+	m_FixedFrameRate = 60;
 }
 
 Timing::~Timing()
@@ -17,6 +17,8 @@ Timing::~Timing()
 
 
 void Timing::Tick() {
+	const int target_frame_duration = 1000 / m_FixedFrameRate;
+
 	m_currentTime = SDL_GetTicks();
 	m_deltaTime = (m_currentTime - m_lastTime) / 1000.0f;
 
@@ -30,4 +32,10 @@ void Timing::Tick() {
 	}
 
 	m_lastTime = m_currentTime;
+
+	int frame_duration = SDL_GetTicks() - m_lastTime;
+
+	if (frame_duration < target_frame_duration) {
+		SDL_Delay(target_frame_duration - frame_duration);
+	}
 }
