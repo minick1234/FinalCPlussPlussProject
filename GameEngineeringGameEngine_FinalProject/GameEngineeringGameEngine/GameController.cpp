@@ -479,7 +479,40 @@ void GameController::RunGame() {
 				SaveGame = false;
 				//save the game here.
 				ofstream writeStream("saveGame.bin", ios::out | ios::binary);
+				CurrentLevel->SetGameTime(GameTime);
+
+				CurrentLevel->SetGameState(GameState);
+
+				CurrentLevel->SetPlayerOneName(m_text);
+				CurrentLevel->SetPlayerTwoName(m_text2);
+
+				CurrentLevel->SetPlayerOneLosses(PlayerOneLossesCount);
+				CurrentLevel->SetPlayerTwoLosses(PlayerTwoLossesCount);
+
+				CurrentLevel->SetPlayerOneWins(PlayerOneWinCount);
+				CurrentLevel->SetPlayerTwoWins(PlayerTwoWinCount);
+
+				CurrentLevel->SetPlayerOneWinState(randomValue1);
+				CurrentLevel->SetPlayerTwoWinState(randomValue2);
+
+				CurrentLevel->SetBackGroundColor(CurrentLevel->GetLevelBackgroundColorR(), CurrentLevel->GetLevelBackgroundColorB(), CurrentLevel->GetLevelBackgroundColorB());
+				CurrentLevel->SetLevelNumber(CurrentLevel->GetLevelNumber());
+				CurrentLevel->SetMapSize(CurrentLevel->GetLevelMapSizeX(), CurrentLevel->GetLevelMapSizeY());
+
+
 				CurrentLevel->Serialize(writeStream);
+				PlayerOneSheet->Serialize(writeStream);
+				PlayerTwoSheet->Serialize(writeStream);
+
+
+
+				for (SoundEffect* sound : m_effects) {
+					if (sound != nullptr) {
+						sound->Serialize(writeStream);
+					}
+
+				}
+				m_song->Serialize(writeStream);
 				writeStream.close();
 				SaveCount++;
 			}
@@ -487,9 +520,37 @@ void GameController::RunGame() {
 			if (LoadGame) {
 				LoadGame = false;
 				ifstream readStream("saveGame.bin", ios::in | ios::binary);
+
 				CurrentLevel->DeSerialize(readStream);
+
+				GameTime = CurrentLevel->GetLevelGameTime();
+				GameState = CurrentLevel->GetGameState();
+				m_text = CurrentLevel->GetPlayerOneName();
+
+				m_text2 = CurrentLevel->GetPlayerTwoName();
+
+				PlayerOneLossesCount = CurrentLevel->GetPlayerOneLosses();
+				PlayerTwoLossesCount = CurrentLevel->GetPlayerTwoLosses();
+
+				PlayerOneWinCount = CurrentLevel->GetPlayerOneWins();
+				PlayerTwoWinCount = CurrentLevel->GetPlayerTwoWins();
+				CurrentLevel->SetMapSize(m_renderer->GetWindowSize().X, m_renderer->GetWindowSize().Y);
+
+				randomValue1 = CurrentLevel->GetPlayerOneWinState();
+				randomValue2 = CurrentLevel->GetPlayerTwoWinState();
+
+				PlayerOneSheet->DeSerialize(readStream);
+				PlayerTwoSheet->DeSerialize(readStream);
+
+				for (SoundEffect* sound : m_effects) {
+					if (sound != nullptr) {
+						sound->DeSerialize(readStream);
+					}
+				}
+				m_song->DeSerialize(readStream);
 				readStream.close();
 				LoadCount++;
+				continue;
 			}
 
 
@@ -500,6 +561,10 @@ void GameController::RunGame() {
 
 				if (m_input->MS()->GetButLDown())
 				{
+					cout << "Player sheet x : " << PlayerOneSheet->point->X << endl;
+					cout << "Player sheet y: " << PlayerOneSheet->point->Y << endl;
+					cout << "Current level x: " << CurrentLevel->GetLevelMapSizeX() << " Current Level y: " << CurrentLevel->GetLevelMapSizeY() << endl;
+
 					if (!CheckIfWillBeOutOfBounds(m_mPos.X - (PlayerOneSheet->GetClipSizeX() / 2), CurrentLevel->GetLevelMapSizeX(), PlayerOneSheet->GetClipSizeX(), true, true))
 					{
 						PlayerOneSheet->point->X = m_mPos.X - (PlayerOneSheet->GetClipSizeX() / 2);

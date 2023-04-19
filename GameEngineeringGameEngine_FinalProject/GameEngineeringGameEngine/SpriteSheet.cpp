@@ -3,6 +3,7 @@
 ObjectPool<SpriteSheet>* SpriteSheet::Pool;
 
 SpriteSheet::SpriteSheet() {
+	point = new Point();
 	m_rows = 0;
 	m_columns = 0;
 	m_clipSizeX = 0;
@@ -58,16 +59,17 @@ void SpriteSheet::DeSerialize(std::istream& _stream) {
 	_stream.read(reinterpret_cast<char*> (&m_columns), sizeof(m_columns));
 	_stream.read(reinterpret_cast<char*> (&m_clipSizeX), sizeof(m_clipSizeX));
 	_stream.read(reinterpret_cast<char*> (&m_clipSizeY), sizeof(m_clipSizeY));
+	_stream.read(reinterpret_cast<char*> (point), sizeof(Point));
 
-	int count;
-	_stream.read(reinterpret_cast<char*> (&count), sizeof(count));
-	for (int c = 0; c < count; c++) {
-		AnimationNames index;
-		_stream.read(reinterpret_cast<char*> (&index), sizeof(index));
-		SpriteAnim* anim = SpriteAnim::Pool->GetResources();
-		anim->DeSerialize(_stream);
-		m_animations[index] = anim;
-	}
+	//int count;
+	//_stream.read(reinterpret_cast<char*> (&count), sizeof(count));
+	//for (int c = 0; c < count; c++) {
+	//	AnimationNames index;
+	//	_stream.read(reinterpret_cast<char*> (&index), sizeof(index));
+	//	SpriteAnim* anim = SpriteAnim::Pool->GetResources();
+	//	anim->DeSerialize(_stream);
+	//	m_animations[index] = anim;
+	//}
 	Texture::DeSerialize(_stream);
 
 }
@@ -85,16 +87,18 @@ void SpriteSheet::Serialize(std::ostream& _stream) {
 	_stream.write(reinterpret_cast<char*> (&m_columns), sizeof(m_columns));
 	_stream.write(reinterpret_cast<char*> (&m_clipSizeX), sizeof(m_clipSizeX));
 	_stream.write(reinterpret_cast<char*> (&m_clipSizeY), sizeof(m_clipSizeY));
+	_stream.write(reinterpret_cast<char*> (point), sizeof(Point));
 
-	int count = m_animations.size();
+	//int count = m_animations.size();
 
-	_stream.write(reinterpret_cast<char*> (&count), sizeof(count));
+	//_stream.write(reinterpret_cast<char*> (&count), sizeof(count));
 
-	for (auto& a : m_animations) {
-		AnimationNames index = a.first;
-		_stream.write(reinterpret_cast<char*>(&index), sizeof(index));
-		a.second->Serialize(_stream);
-	}
+	//for (auto& a : m_animations) {
+	//	AnimationNames index = a.first;
+	//	_stream.write(reinterpret_cast<char*>(&index), sizeof(index));
+	//	a.second->Serialize(_stream);
+	//}
+
 	Texture::Serialize(_stream);
 }
 

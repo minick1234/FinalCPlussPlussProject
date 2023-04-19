@@ -39,6 +39,8 @@ void Level::SetGameTime(float GameTime) {
 	Level::m_gameTime = GameTime;
 }
 
+
+
 float Level::GetLevelGameTime() {
 	return Level::m_gameTime;
 }
@@ -71,6 +73,43 @@ byte Level::GetLevelBackgroundColorB() {
 	return Level::Background_B_Value;
 
 }
+void Level::SetGameState(int GameStateValue)
+{
+	Gamestate = GameStateValue;
+}
+void Level::SetPlayerOneName(string name)
+{
+	PlayerOneName = name;
+}
+void Level::SetPlayerTwoName(string name)
+{
+	PlayerTwoName = name;
+}
+void Level::SetPlayerOneWins(int wins)
+{
+	PlayerOneWins = wins;
+}
+void Level::SetPlayerTwoWins(int wins)
+{
+	PlayerTwoWins = wins;
+}
+void Level::SetPlayerTwoLosses(int losses)
+{
+	PlayerTwoLosses = losses;
+}
+void Level::SetPlayerOneLosses(int losses)
+{
+	PlayerOneLosses = losses;
+}
+void Level::SetPlayerTwoWinState(int winState)
+{
+	PlayerTwoWinState = winState;
+}
+
+void Level::SetPlayerOneWinState(int winState)
+{
+	PlayerOneWinState = winState;
+}
 void Level::AssignNonDefaultValues() {
 	m_mapSizeX = 128;
 	m_mapSizeY = 256;
@@ -92,6 +131,16 @@ void Level::Serialize(std::ostream& _stream) {
 	_stream.write(reinterpret_cast<char*> (&Background_B_Value), sizeof(Background_B_Value));
 	_stream.write(reinterpret_cast<char*> (&Background_R_Value), sizeof(Background_R_Value));
 	_stream.write(reinterpret_cast<char*> (&Background_G_Value), sizeof(Background_G_Value));
+	
+	_stream.write(reinterpret_cast<char*> (&Gamestate), sizeof(Gamestate));
+	_stream.write(reinterpret_cast<char*> (&PlayerOneName), sizeof(PlayerOneName));
+	_stream.write(reinterpret_cast<char*> (&PlayerOneWins), sizeof(PlayerOneWins));
+	_stream.write(reinterpret_cast<char*> (&PlayerOneLosses), sizeof(PlayerOneLosses));
+	_stream.write(reinterpret_cast<char*> (&PlayerOneWinState), sizeof(PlayerOneWinState));
+	_stream.write(reinterpret_cast<char*> (&PlayerTwoName), sizeof(PlayerTwoName));
+	_stream.write(reinterpret_cast<char*> (&PlayerTwoWins), sizeof(PlayerTwoWins));
+	_stream.write(reinterpret_cast<char*> (&PlayerTwoLosses), sizeof(PlayerTwoLosses));
+	_stream.write(reinterpret_cast<char*> (&PlayerTwoWinState), sizeof(PlayerTwoWinState));
 
 
 
@@ -113,6 +162,17 @@ void Level::DeSerialize(std::istream& _stream) {
 	_stream.read(reinterpret_cast<char*> (&Background_B_Value), sizeof(Background_B_Value));
 	_stream.read(reinterpret_cast<char*> (&Background_R_Value), sizeof(Background_R_Value));
 	_stream.read(reinterpret_cast<char*> (&Background_G_Value), sizeof(Background_G_Value));
+
+
+	_stream.read(reinterpret_cast<char*> (&Gamestate), sizeof(Gamestate));
+	_stream.read(reinterpret_cast<char*> (&PlayerOneName), sizeof(PlayerOneName));
+	_stream.read(reinterpret_cast<char*> (&PlayerOneWins), sizeof(PlayerOneWins));
+	_stream.read(reinterpret_cast<char*> (&PlayerOneLosses), sizeof(PlayerOneLosses));
+	_stream.read(reinterpret_cast<char*> (&PlayerOneWinState), sizeof(PlayerOneWinState));
+	_stream.read(reinterpret_cast<char*> (&PlayerTwoName), sizeof(PlayerTwoName));
+	_stream.read(reinterpret_cast<char*> (&PlayerTwoWins), sizeof(PlayerTwoWins));
+	_stream.read(reinterpret_cast<char*> (&PlayerTwoLosses), sizeof(PlayerTwoLosses));
+	_stream.read(reinterpret_cast<char*> (&PlayerTwoWinState), sizeof(PlayerTwoWinState));
 
 	int numberOfUnits;
 	_stream.read(reinterpret_cast<char*>(&numberOfUnits), sizeof(numberOfUnits));

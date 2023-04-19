@@ -3,6 +3,7 @@
 
 #include "StandardIncludes.h"
 #include "AudioController.h"
+#include "Level.h"
 
 class Renderer;
 class TTFont;
@@ -15,13 +16,13 @@ class WavDraw;
 class GameController : public Singleton<GameController> {
 
 
-public : 
+public:
 	GameController();
 	virtual ~GameController();
 
 	void RunGame();
 	void Initialize();
-	void HandleInputLevelOne(SDL_Event _event, bool &NotValidUserName, bool& playerOne, bool& LevelComplete);
+	void HandleInputLevelOne(SDL_Event _event, bool& NotValidUserName, bool& playerOne, bool& LevelComplete);
 	void PrintPlayerHud(string playerText, Point PlayerPosition, int GameState, int WinState, int wins, int loses);
 	void HandleInputLevelTwo(SDL_Event event, int& GameState, int& randomValue1, int& randomValue2, bool& HasPickedWinner, Point* playerOnePosition, Point* playerTwoPosition, int LevelXSize, int LevelYSize, int clipXSize, int clipYSize, bool& saveGame, bool& loadGame);
 	void InitializeLevelTwo();
@@ -32,7 +33,7 @@ public :
 	void LoadLevelOneHud();
 	void ShutDown();
 
-private :
+private:
 	SDL_Event m_sdlEvent;
 	Renderer* m_renderer;
 	TTFont* m_fArial20;
@@ -41,7 +42,7 @@ private :
 
 	bool m_quit;
 	InputController* m_input;
-	
+
 	string m_text;
 	string m_text2;
 

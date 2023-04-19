@@ -5,7 +5,7 @@
 
 class Level : public Resource {
 
-public : 
+public:
 	Level();
 	~Level();
 
@@ -27,24 +27,56 @@ public :
 	byte GetLevelBackgroundColorB();
 
 
+	void SetGameState(int GameStateValue);
+	int GetGameState() { return Gamestate; }
 
-private :
+	void SetPlayerOneName(string name);
+	string GetPlayerOneName() { return PlayerOneName; }
+
+	void SetPlayerTwoName(string name);
+	string GetPlayerTwoName() { return PlayerTwoName; }
+
+	void SetPlayerOneWins(int wins);
+	int GetPlayerOneWins() { return PlayerOneWins; }
+
+	void SetPlayerTwoWins(int wins);
+	int GetPlayerTwoWins() { return PlayerTwoWins; }
+
+	void SetPlayerTwoLosses(int losses);
+	int GetPlayerTwoLosses() { return PlayerTwoLosses; }
+
+	void SetPlayerOneLosses(int losses);
+	int GetPlayerOneLosses() { return PlayerOneLosses; }
+
+	void SetPlayerTwoWinState(int winState);
+	int GetPlayerTwoWinState() { return PlayerTwoWinState; }
+
+	void SetPlayerOneWinState(int winState);
+	int GetPlayerOneWinState() { return PlayerOneWinState; }
+
+
+private:
 	//Main Level params
 	int m_levelNumber = -1;
 	int m_mapSizeX;
 	int m_mapSizeY;
-	
+
 	//BackgroundColorValues 
 	byte Background_R_Value;
 	byte Background_G_Value;
 	byte Background_B_Value;
 
+	int Gamestate;
+
 	string PlayerOneName;
 	int PlayerOneWins;
 	int PlayerOneLosses;
-	float PlayerOneXPosition;
-	float PlayerOneYPosition;
+	int PlayerOneWinState;
 
+	string PlayerTwoName;
+	int PlayerTwoWins;
+	int PlayerTwoLosses;
+	int PlayerTwoWinState;
 
 	//Other params
 	float m_gameTime;
