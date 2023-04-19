@@ -97,9 +97,54 @@ bool Controller::ProcessButtons(SDL_Event event) {
 
 }
 
+bool Controller::ProcessMotionForLeftStick(SDL_Event event)
+{
+	if (event.type != SDL_CONTROLLERAXISMOTION) return false;
+
+	for (unsigned int count = 0; count < m_controllers.size(); count++) {
+		if (m_controllers[count].ID != event.cdevice.which) {
+			continue;
+		}
+
+		//This is the left analog stick
+		if (event.caxis.axis == 0) { // x axis motion
+			m_controllers[count].LeftAxis.X = event.caxis.value;
+			LeftStickXValue = event.caxis.value;
+		}
+		else if (event.caxis.axis == 1) {
+			m_controllers[count].LeftAxis.Y = event.caxis.value;
+			LeftStickYValue = event.caxis.value;
+		}
+	}
+	return true;
+}
+
+bool Controller::ProcessMotionForRightStick(SDL_Event event)
+{
+	if (event.type != SDL_CONTROLLERAXISMOTION) return false;
+
+	for (unsigned int count = 0; count < m_controllers.size(); count++) {
+		if (m_controllers[count].ID != event.cdevice.which) {
+			continue;
+		}
+		//This is the Right analog stick
+		if (event.caxis.axis == 2) {
+			m_controllers[count].RightAxis.X = event.caxis.value;
+			RightStickXValue = event.caxis.value;
+
+		}
+		else if (event.caxis.axis == 3) {
+			m_controllers[count].RightAxis.Y = event.caxis.value;
+			RightStickYValue = event.caxis.value;
+
+		}
+	}
+	return true;
+}
+
 bool Controller::ProcessMotion(SDL_Event event) {
 	if (event.type != SDL_CONTROLLERAXISMOTION) return false;
-	
+
 	for (unsigned int count = 0; count < m_controllers.size(); count++) {
 		if (m_controllers[count].ID != event.cdevice.which) {
 			continue;
@@ -129,8 +174,6 @@ bool Controller::ProcessMotion(SDL_Event event) {
 
 	return true;
 }
-
-
 
 string Controller::ToString() {
 	int cc = 0;

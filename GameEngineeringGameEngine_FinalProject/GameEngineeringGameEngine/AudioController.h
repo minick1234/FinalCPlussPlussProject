@@ -5,7 +5,6 @@
 
 constexpr int MaxEffectsPerChannels = 16;
 
-
 class SoundEffect;
 class Song;
 

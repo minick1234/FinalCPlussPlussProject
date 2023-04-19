@@ -41,6 +41,16 @@ public:
 	bool Removed(SDL_Event event);
 	bool ProcessButtons(SDL_Event event);
 	bool ProcessMotion(SDL_Event event);
+	bool ProcessMotionForLeftStick(SDL_Event event);
+	bool ProcessMotionForRightStick(SDL_Event event);
+
+	float LeftStickXValue;
+	float RightStickXValue;
+
+	float LeftStickYValue;
+	float RightStickYValue;
+
+
 	string ToString();
 
 private:

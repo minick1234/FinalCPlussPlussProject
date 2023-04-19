@@ -22,15 +22,15 @@ public :
 	void RunGame();
 	void Initialize();
 	void HandleInputLevelOne(SDL_Event _event, bool &NotValidUserName, bool& playerOne, bool& LevelComplete);
-	void HandleInputLevelTwo(SDL_Event event);
-	void PrintPlayerHud(string playerText, Point PlayerPosition, int GameState, bool HasRolled, int WinState, int wins, int loses);
+	void PrintPlayerHud(string playerText, Point PlayerPosition, int GameState, int WinState, int wins, int loses);
+	void HandleInputLevelTwo(SDL_Event event, int& GameState, int& randomValue1, int& randomValue2, bool& HasPickedWinner, Point* playerOnePosition, Point* playerTwoPosition, int LevelXSize, int LevelYSize, int clipXSize, int clipYSize, bool& saveGame, bool& loadGame);
 	void InitializeLevelTwo();
 	void SaveLevelTwo();
+	bool CheckIfWillBeOutOfBounds(float ValueToAdd, float ScreenSize, float PlayerSize, bool MouseDrag, bool XCheck);
 	void LoadLevelTwo();
 	void LoadLevelTwoHud(int GameTime, int FramesPerSecond, int Saves, int Loads);
 	void LoadLevelOneHud();
 	void ShutDown();
-
 
 private :
 	SDL_Event m_sdlEvent;

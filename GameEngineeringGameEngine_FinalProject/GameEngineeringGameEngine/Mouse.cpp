@@ -34,7 +34,8 @@ void Mouse::ProcessButtons(SDL_Event event) {
 		if (event.button.button == SDL_BUTTON_LEFT) m_butLDown = false;
 		if (event.button.button == SDL_BUTTON_MIDDLE) m_butMDown = false;
 		if (event.button.button == SDL_BUTTON_RIGHT) m_butRDown = false;
-
+		cout << "i am now in here letting go" << endl;
 	}
+
 }
 

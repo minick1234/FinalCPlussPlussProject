@@ -31,7 +31,7 @@ void AudioController::Play(SoundEffect* effect) {
 
 	int channel;
 	channel = Mix_PlayChannel(-1,GetSDLSFX(effect),0);
-	if (channel == 1)return;
+	if (channel == -1)return;
 	m_currentEffects[channel] = effect->GetData()->GetGUID();
 	Mix_ChannelFinished(AudioController::CatchChannelDone);
 }

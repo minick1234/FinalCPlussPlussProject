@@ -39,6 +39,13 @@ private :
 	byte Background_G_Value;
 	byte Background_B_Value;
 
+	string PlayerOneName;
+	int PlayerOneWins;
+	int PlayerOneLosses;
+	float PlayerOneXPosition;
+	float PlayerOneYPosition;
+
+
 	//Other params
 	float m_gameTime;
 	vector<Unit*> m_unit;
